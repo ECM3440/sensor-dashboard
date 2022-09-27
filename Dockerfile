@@ -2,7 +2,8 @@ FROM node:latest as build
 
 WORKDIR /react-app
 
-COPY package*.json .
+COPY package.json .
+COPY package-lock.json .
 
 RUN yarn install
 
