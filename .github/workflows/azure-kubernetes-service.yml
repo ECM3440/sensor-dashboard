@@ -41,7 +41,6 @@ env:
 
 jobs:
   buildImage:
-    needs: ["setEnvVariables"]
     permissions:
       contents: read
       id-token: write
@@ -62,7 +61,6 @@ jobs:
         az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1 --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }}  .
 
   createSecret:
-    needs: ["setEnvVariables"]
     permissions:
       contents: read
       id-token: write
