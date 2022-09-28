@@ -1,7 +1,7 @@
 #!/bin/bash
 
 AKS_RESOURCE_GROUP=ECM3440
-AKS_CLUSTER_NAME=GroupAssignmentAKS
+AKS_CLUSTER_NAME=groupAssignmentAKS
 ACR_RESOURCE_GROUP=ECM3440
 ACR_NAME=GroupAssignmentRegistry
 
