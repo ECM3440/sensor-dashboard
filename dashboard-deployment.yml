@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: sensor-dashboard
-        image: neo/sensor-dashboard
+        image: sensor-dashboard:latest
         ports:
         - containerPort: 80
