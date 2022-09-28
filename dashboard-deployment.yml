@@ -30,6 +30,6 @@ spec:
     - port: 80
       targetPort: 80
       protocol: TCP
-      nodePort: 3000
+      nodePort: 31000
   selector:
     app: sensor-dashboard
