@@ -40,17 +40,8 @@ env:
   DEPLOYMENT_MANIFEST_PATH: 'dashboard-deployment.yml'
 
 jobs:
-  # setEnvVariables:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Set env
-  #     run: echo "GITHUB_SHA=$(echo $GITHUB_SHA)" >> $GITHUB_ENV
-  #   - name: Do sed
-  #     run: sed -e 's|GITHUB_SHA|'$(echo $GITHUB_SHA)'|g' dashboard-deployment.yml
-
   buildImage:
-    # needs: ["setEnvVariables"]
+    needs: ["setEnvVariables"]
     permissions:
       contents: read
       id-token: write
@@ -68,10 +59,10 @@ jobs:
     # Builds and pushes an image up to your Azure Container Registry
     - name: Build and push image to ACR
       run: |
-        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }}  .
+        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1 --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }}  .
 
   createSecret:
-    # needs: ["setEnvVariables"]
+    needs: ["setEnvVariables"]
     permissions:
       contents: read
       id-token: write
@@ -138,11 +129,9 @@ jobs:
     # Deploys application based on given manifest file
     - name: Deploys application
       uses: Azure/k8s-deploy@v4
-    - name: Do sed
-      run: sed -e 's|GITHUB_SHA|'$(echo $GITHUB_SHA)'|g' dashboard-deployment.yml
       with:
         manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
         images: |
-          ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+          ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1
         imagepullsecrets: |
           ${{ env.IMAGE_PULL_SECRET_NAME }}

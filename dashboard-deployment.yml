@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: sensor-dashboard
-        image: sensor-dashboard:GITHUB_SHA
+        image: sensor-dashboard:v1
         ports:
         - containerPort: 80
