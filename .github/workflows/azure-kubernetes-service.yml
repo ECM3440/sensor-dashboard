@@ -36,7 +36,7 @@ env:
   CONTAINER_NAME: "sensor-dashboard"
   RESOURCE_GROUP: "ECM3440"
   CLUSTER_NAME: "GroupAssignmentAKS"
-  IMAGE_PULL_SECRET_NAME: "c1I8Q~Pk3I~6cwGCPhG0NfB9dYn.-AJTEq2Qocau"
+  IMAGE_PULL_SECRET_NAME: "image-pull-secret"
   DEPLOYMENT_MANIFEST_PATH: 'dashboard-deployment.yml'
 
 jobs:
