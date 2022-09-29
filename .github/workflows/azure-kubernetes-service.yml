@@ -119,7 +119,7 @@ jobs:
         namespace: 'default'
         manifests: |
             ${{ env.DEPLOYMENT_MANIFEST_PATH }}l
-        images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/azure-vote-front:${{ github.sha }}'
+        images: '${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1'
         pull: false 
 
   #   # Checks out the repository this file is in
