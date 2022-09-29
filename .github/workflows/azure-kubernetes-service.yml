@@ -37,7 +37,7 @@ env:
   RESOURCE_GROUP: "ECM3440"
   CLUSTER_NAME: "groupAssignmentAKS"
   IMAGE_PULL_SECRET_NAME: "image-pull-secret"
-  DEPLOYMENT_MANIFEST_PATH: 'dashboard-deployment.yml'
+  DEPLOYMENT_MANIFEST_PATH: 'deployment.yml'
 
 jobs:
   buildImage:
