@@ -128,7 +128,8 @@ jobs:
         manifests: |
             ${{ env.DEPLOYMENT_MANIFEST_PATH }}
         images: '${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1'
-        pull: false 
+        imagepullsecrets: |
+          ${{ env.CONTAINER_NAME }}
 
       
   #   # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
@@ -145,5 +146,3 @@ jobs:
   #       manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
   #       images: |
   #         ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1
-  #       imagepullsecrets: |
-  #         ${{ env.IMAGE_PULL_SECRET_NAME }}
