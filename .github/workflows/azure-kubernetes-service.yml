@@ -35,8 +35,8 @@ env:
   AZURE_CONTAINER_REGISTRY: "groupassignmentregistry"
   CONTAINER_NAME: "sensor-dashboard"
   RESOURCE_GROUP: "ECM3440"
-  CLUSTER_NAME: "groupAssignmentAKS"
-  IMAGE_PULL_SECRET_NAME: "image-pull-secret"
+  CLUSTER_NAME: "groupassignmentaks"
+  IMAGE_PULL_SECRET_NAME: "pullsecret"
   DEPLOYMENT_MANIFEST_PATH: 'deployment.yml'
 
 jobs:
