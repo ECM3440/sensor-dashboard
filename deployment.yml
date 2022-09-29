@@ -31,11 +31,10 @@ apiVersion: v1
 metadata:
   name: sensor-dashboard
 spec:
-  type: NodePort
-  ports:
-    - port: 3050
-      targetPort: 3000
-      protocol: TCP
-      nodePort: 31000
+  type: LoadBalancer
   selector:
     app: sensor-dashboard
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
