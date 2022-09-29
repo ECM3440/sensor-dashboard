@@ -1,10 +1,11 @@
 VERSION_FILE := version
-VERSION := $(shell cat ${VERSION_FILE})
-IMAGE_REPO := $(ACR_NAME).azurecr.io/upgrade-test
+# VERSION := $(shell cat ${VERSION_FILE})
+VERSION := v1
+IMAGE_REPO := $(ACR_NAME).azurecr.io
 
 .PHONY: build
 build:
-	docker build -t $(IMAGE_REPO):$(VERSION) .
+	# docker build -t $(IMAGE_REPO):$(VERSION) 
 
 .PHONY: registry-login
 registry-login:
