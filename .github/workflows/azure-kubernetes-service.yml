@@ -114,12 +114,22 @@ jobs:
     - name: Get K8s context
       uses: azure/aks-set-context@v2.0
       with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
         resource-group: ${{ env.RESOURCE_GROUP }}
         cluster-name: ${{ env.CLUSTER_NAME }}
-        
+    
+    - name: Creating ImagePullSecret
+      uses: Azure/k8s-create-secret@v1
+      with:
+        container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+        container-registry-username: ${{ secrets.ACR_USERNAME }}
+        container-registry-password: ${{ secrets.ACR_PASSWORD }}
+        secret-name: k8s-secret
+      
     - name: Setup kubectl
       id: install-kubectl
       uses: azure/setup-kubectl@v3
+
     - name: Deploy to AKS
       id: deploy-aks
       uses: Azure/k8s-deploy@v4
@@ -129,7 +139,7 @@ jobs:
             ${{ env.DEPLOYMENT_MANIFEST_PATH }}
         images: '${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1'
         imagepullsecrets: |
-          ${{ env.CONTAINER_NAME }}
+          k8s-secret
 
       
   #   # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
