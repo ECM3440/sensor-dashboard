@@ -126,7 +126,7 @@ jobs:
       with:
         namespace: 'default'
         manifests: |
-            ${{ env.DEPLOYMENT_MANIFEST_PATH }}l
+            ${{ env.DEPLOYMENT_MANIFEST_PATH }}
         images: '${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1'
         pull: false 
 
