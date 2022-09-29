@@ -21,6 +21,8 @@ spec:
             memory: "550Mi"
             cpu: "500m"
         imagePullPolicy: Always
+        imagePullSecrets:
+        - name: pull-secret 
         ports:
         - containerPort: 80
       restartPolicy: Always
