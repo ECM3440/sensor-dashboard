@@ -28,7 +28,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: sensor-dashboard
+  name: sensor-dashboard-loadbalancer
 spec:
   type: LoadBalancer
   selector:
