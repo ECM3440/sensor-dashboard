@@ -24,6 +24,7 @@ spec:
       restartPolicy: Always
 
 ---
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -35,4 +36,3 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
