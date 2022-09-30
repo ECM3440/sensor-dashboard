@@ -53,9 +53,9 @@ spec:
     http:
       paths:
       - path: /
-      pathType: Prefix
-      backend:
-        service:
-          name: sensor-dashboard
-          port:
-            number: 80
+        pathType: Prefix
+        backend:
+          service:
+            name: sensor-dashboard
+            port:
+              number: 80
