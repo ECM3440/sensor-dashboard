@@ -17,7 +17,7 @@ spec:
         image: groupassignmentregistry.azurecr.io/sensor-dashboard:v1
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 3000
         resources:
          #cpu and memory limit
           limits:
@@ -36,7 +36,7 @@ spec:
   selector:
     app: sensor-dashboard
   ports:
-  - port: 80
+  - port: 3000
 
 
 ---
@@ -59,4 +59,4 @@ spec:
           service:
             name: sensor-dashboard
             port:
-              number: 80
+              number: 3000
