@@ -15,14 +15,22 @@ spec:
       containers:
       - name: sensor-dashboard
         image: groupassignmentregistry.azurecr.io/sensor-dashboard:v1
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /
         resources:
          #cpu and memory limit
           limits:
             memory: "550Mi"
             cpu: "500m"
-        imagePullPolicy: Always
       restartPolicy: Always
 
 ---
