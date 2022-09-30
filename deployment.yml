@@ -24,14 +24,6 @@ spec:
         ports:
         - containerPort: 80
       restartPolicy: Always
-      readinessProbe:
-        httpGet:
-          port: 8080
-          path: /
-      livenessProbe:
-        httpGet:
-          port: 8080
-          path: /
 
 ---
 kind: Service
