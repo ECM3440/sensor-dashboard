@@ -126,9 +126,8 @@ jobs:
         resource-group: ${{ env.RESOURCE_GROUP }}
         cluster-name: ${{ env.CLUSTER_NAME }}
 
-    - name: Switch to staging cluster
-      run: kubectl config use-context staging
-    - uses: swdotcom/update-and-apply-kubernetes-configs@v1
+    - name: Inject environment variable
+      uses: swdotcom/update-and-apply-kubernetes-configs@v1
       with:
         k8-config-file-paths: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
         replacement-method: defined
