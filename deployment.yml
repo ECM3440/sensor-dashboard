@@ -13,16 +13,16 @@ spec:
         app: sensor-dashboard
     spec:
       containers:
-        - name: sensor-dashboard
-          image: groupassignmentregistry.azurecr.io/sensor-dashboard:v1
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 3000
-          resources:
-            #cpu and memory limit
-            limits:
-              memory: "550Mi"
-              cpu: "500m"
+      - name: sensor-dashboard
+        image: groupassignmentregistry.azurecr.io/sensor-dashboard:${IMAGE_TAG}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        resources:
+         #cpu and memory limit
+          limits:
+            memory: "550Mi"
+            cpu: "500m"
       restartPolicy: Always
 
 ---
