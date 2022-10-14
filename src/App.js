@@ -2,6 +2,31 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import Navbar from "./components/Navbar";
+import { Typography } from '@material-ui/core';
+
+const SensorChart = ({ data }) => {
+  const options = {
+    title: "Sensor Values Over Time",
+    curveType: "function",
+    legend: { position: "bottom" },
+  };
+
+  return (<Chart
+    chartType="LineChart"
+    width="100%"
+    height="400px"
+    data={data}
+    options={options}
+  />)
+}
+
+const NoDataMessage = () => {
+  return (
+    <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+      No data received
+    </Typography>
+  )
+}
 
 function App() {
   const [data, setData] = useState([])
@@ -10,11 +35,6 @@ function App() {
     subscribe()
   }, [])
 
-  const options = {
-    title: "Sensor Values Over Time",
-    curveType: "function",
-    legend: { position: "bottom" },
-  };
 
   const subscribe = (function () {
     var executed = false;
@@ -30,7 +50,7 @@ function App() {
 
   const getSensorReadings = async () => {
     try {
-      const response = await fetch("http://localhost:8080", {
+      const response = await fetch(process.env.REACT_APP_EVENTPROCESSOR_URL, {
         method: "GET",
         headers: {
           accept: "application/json",
@@ -82,13 +102,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Chart
-        chartType="LineChart"
-        width="100%"
-        height="400px"
-        data={data}
-        options={options}
-      />
+      {data.length === 0 ? <NoDataMessage /> : <SensorChart data={data} />}
     </div>
   );
 }
