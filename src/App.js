@@ -12,6 +12,7 @@ const SensorChart = ({ data }) => {
   };
 
   return (<Chart
+    data-testid="sensor-chart"
     chartType="LineChart"
     width="100%"
     height="400px"
@@ -22,7 +23,7 @@ const SensorChart = ({ data }) => {
 
 const NoDataMessage = () => {
   return (
-    <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+    <Typography data-testid="no-data-msg" variant="h4" component="div" sx={{ flexGrow: 1 }}>
       No data received
     </Typography>
   )
@@ -41,6 +42,7 @@ function App() {
     return function () {
       if (!executed) {
         executed = true;
+        getSensorReadings()
         setInterval(() => {
           getSensorReadings()
         }, 10000);
@@ -48,9 +50,9 @@ function App() {
     };
   })();
 
-  const getSensorReadings = async () => {
+  const fetchSensorReadings = async () => {
     try {
-      const response = await fetch(process.env.REACT_APP_EVENTPROCESSOR_URL, {
+      const response = await fetch(`${process.env.REACT_APP_EVENTPROCESSOR_URL}`, {
         method: "GET",
         headers: {
           accept: "application/json",
@@ -61,12 +63,16 @@ function App() {
         throw new Error(`Error! status: ${response.status}`);
       }
 
-      const result = await response.json();
-      const formattedData = formatToChartData(result)
-      setData(formattedData)
+      return await response.json();
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const getSensorReadings = async () => {
+    const result = await fetchSensorReadings()
+    const formattedData = formatToChartData(result)
+    setData(formattedData)
   }
 
   const formatToChartData = (result) => {
