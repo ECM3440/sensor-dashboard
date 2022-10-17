@@ -19,15 +19,16 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
         with:
-          python-version: 3.8
+          node-version: 12
 
-      - name: Install Python dependencies
-        run: pip install black
+      # ESLint must be in `package.json`
+      - name: Install Node.js dependencies
+        run: npm ci
 
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
-          black: true
+          eslint: true
