@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import Navbar from "./components/Navbar";
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 
 const SensorChart = ({ data }) => {
   const options = {
@@ -71,8 +71,11 @@ function App() {
 
   const getSensorReadings = async () => {
     const result = await fetchSensorReadings()
-    const formattedData = formatToChartData(result)
-    setData(formattedData)
+
+    if (result.length > 0) {
+      const formattedData = formatToChartData(result)
+      setData(formattedData)
+    }
   }
 
   const formatToChartData = (result) => {
