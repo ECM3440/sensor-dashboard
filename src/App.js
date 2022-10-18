@@ -71,8 +71,11 @@ function App() {
 
   const getSensorReadings = async () => {
     const result = await fetchSensorReadings()
-    const formattedData = formatToChartData(result)
-    setData(formattedData)
+
+    if (result.length > 0) {
+      const formattedData = formatToChartData(result)
+      setData(formattedData)
+    }
   }
 
   const formatToChartData = (result) => {
