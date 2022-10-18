@@ -1,9 +1,9 @@
 import * as React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from "@material-ui/core/styles";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from "@mui/styles";
 
 
 const useStyles = makeStyles((theme) => ({

@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import Navbar from "./components/Navbar";
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 
 const SensorChart = ({ data }) => {
   const options = {
