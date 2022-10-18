@@ -26,7 +26,7 @@ describe('sensor chart', () => {
             await waitForElementToBeRemoved(await findByTestId("no-data-msg"))
             await waitFor(await findByTestId("sensor-chart"))
 
-            expect(await findBytestId("sensor-chart")).toBeInTheDocument();
+            expect(await findByTestId("sensor-chart")).toBeInTheDocument();
         }, 100);
     });
 
