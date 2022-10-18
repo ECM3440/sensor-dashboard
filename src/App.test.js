@@ -23,10 +23,10 @@ describe('sensor chart', () => {
         const { findByTestId } = render(<App />)
 
         setTimeout(async () => {
-            await waitForElementToBeRemoved(findByTestId("no-data-msg"))
-            await waitFor(findByTestId("sensor-chart"))
+            await waitForElementToBeRemoved(await findByTestId("no-data-msg"))
+            await waitFor(await findByTestId("sensor-chart"))
 
-            expect(findBytestId("sensor-chart")).toBeInTheDocument();
+            expect(await findByTestId("sensor-chart")).toBeInTheDocument();
         }, 100);
     });
 
