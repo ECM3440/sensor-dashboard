@@ -50,15 +50,14 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "branches": 10,
-        "functions": 50,
-        "lines": 30,
-        "statements": 30
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
       }
     },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "!<rootDir>/src/App.js",
       "!<rootDir>/src/index.js",
       "!<rootDir>/src/reportWebVitals.js"
     ]
