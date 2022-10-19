@@ -6,13 +6,12 @@ on:
 jobs:
     coverage:
         runs-on: ubuntu-latest
+        name: Coverage report
         steps:
-            - uses: actions/checkout@v3
-            - uses: ArtiomTr/jest-coverage-report-action@v2
-              id: coverage
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Test coverage
+              uses: ./ # Uses an action in the root directory
               with:
-                  output: report-markdown
-            - uses: marocchino/sticky-pull-request-comment@v2
-              with:
-                  message: ${{ steps.coverage.outputs.report }}
+                  annotations: failed-tests
                   test-script: npm run test:coverage
