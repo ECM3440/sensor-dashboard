@@ -47,6 +47,16 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 10,
+        "functions": 50,
+        "lines": 30,
+        "statements": 30
+      }
+    }
+  },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
     "dom-testing-library": "^5.0.0",

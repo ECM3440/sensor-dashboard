@@ -4,9 +4,17 @@ on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
   push:
+    paths-ignore:
+      - '/src/App.js'
+      - '/src/index.js'
+      - '/src/reportWebVitals.js'
     branches:
       - main
   pull_request:
+    paths-ignore:
+      - '/src/App.js'
+      - '/src/index.js'
+      - '/src/reportWebVitals.js'
     branches:
       - main
 
@@ -34,9 +42,6 @@ jobs:
   run-tests:
     name: Run tests
     runs-on: ubuntu-latest
-    env:
-      COVERAGE_SINGLE: 60
-      COVERAGE_TOTAL: 60
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
