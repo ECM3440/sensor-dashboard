@@ -26,7 +26,6 @@ spec:
       restartPolicy: Always
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -36,27 +35,25 @@ spec:
   selector:
     app: sensor-dashboard
   ports:
-  - port: 3000
-
+    - port: 3000
 
 ---
-
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
   name: sensor-dashboard
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
-    appgw.ingress.kubernetes.io/use-private-ip: "false" 
+    appgw.ingress.kubernetes.io/use-private-ip: "false"
 spec:
   rules:
-  - host: sensor-dashboard.1ebc354abe5745168776.ukwest.aksapp.io
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: sensor-dashboard
-            port:
-              number: 3000
+    - host: sensor-dashboard.1ebc354abe5745168776.ukwest.aksapp.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sensor-dashboard
+                port:
+                  number: 3000
