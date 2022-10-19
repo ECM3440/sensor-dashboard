@@ -55,7 +55,13 @@
         "lines": 30,
         "statements": 30
       }
-    }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/src/App.js",
+      "!<rootDir>/src/index.js",
+      "!<rootDir>/src/reportWebVitals.js"
+    ]
   },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
