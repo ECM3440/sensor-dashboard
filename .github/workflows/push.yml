@@ -7,7 +7,6 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
-  CONTAINER_NAME: "event-receiver"
   RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
   CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
   IMAGE_PULL_SECRET_NAME: ${{ secrets.IMAGE_PULL_SECRET_NAME }}
@@ -50,7 +49,7 @@ jobs:
 
       - name: Test
         run: npm test -- --ci --coverage --maxWorkers=2
-        
+
   build:
     runs-on: ubuntu-latest
     if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
@@ -69,7 +68,7 @@ jobs:
         id: generate_tag
         uses: anothrNick/github-tag-action@1.52.0
         env:
-          GITHUB_TOKEN: ${{ secrets.ECM3440_GITHUB_TOKEN }}a
+          GITHUB_TOKEN: ${{ secrets.ECM3440_GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
           DRY_RUN: true
@@ -90,9 +89,6 @@ jobs:
       - name: Build and push image
         run: |
           docker build . -t ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.new_tag }} \
-           --build-arg SERVICEBUS_CONNECTION_STR="${{ secrets.SERVICEBUS_CONNECTION_STR }}" \
-           --build-arg SERVICEBUS_TOPIC_NAME="${{ secrets.SERVICEBUS_TOPIC_NAME }}" \
-           --build-arg SERVICEBUS_SUBSCRIPTION_NAME="${{ secrets.SERVICEBUS_SUBSCRIPTION_NAME }}" \
            --label org.opencontainers.image.source=${{ github.event.repository.clone_url }} \
            --label org.opencontainers.image.revision=${{ github.sha }}
 
@@ -213,6 +209,6 @@ jobs:
         with:
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/ecm3440/event-processor:${{ needs.build.outputs.imageTag }}
+            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/ecm3440/sensor-dashboard:${{ needs.build.outputs.imageTag }}
           imagepullsecrets: |
             ${{ env.IMAGE_PULL_SECRET_NAME }}
