@@ -16,9 +16,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^2.1.4"
   },
-  "devDependancies": {
-    "eslint": "^7.32.0"
-  },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -49,9 +47,25 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 15,
+        "functions": 50,
+        "lines": 40,
+        "statements": 40
+      }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/src/index.js",
+      "!<rootDir>/src/reportWebVitals.js"
+    ]
+  },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
     "dom-testing-library": "^5.0.0",
-    "msw": "^0.47.4"
+    "msw": "^0.47.4",
+    "eslint": "^7.32.0"
   }
 }
