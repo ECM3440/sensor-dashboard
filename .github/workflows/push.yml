@@ -90,13 +90,10 @@ jobs:
         run: |
           touch .env && echo "REACT_APP_EVENTPROCESSOR_URL=${{ secrets.EVENTPROCESSOR_URL }}" >> .env
 
-      - name: Build and push image
+      # Builds and pushes an image up to your Azure Container Registry
+      - name: Build and push image to ACR
         run: |
-          docker build . -t ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.new_tag }} \
-           --label org.opencontainers.image.source=${{ github.event.repository.clone_url }} \
-           --label org.opencontainers.image.revision=${{ github.sha }}
-
-          docker push ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.new_tag }}
+          az acr build --image ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.new_tag }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }}  .
 
       - name: Comment on PR
         uses: mshick/add-pr-comment@v1
