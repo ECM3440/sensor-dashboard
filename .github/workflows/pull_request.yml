@@ -5,6 +5,14 @@ on:
     branches:
       - "main"
 
+env:
+  AZURE_CONTAINER_REGISTRY: ${{ secrets.AZURE_CONTAINER_REGISTRY }}
+  CONTAINER_NAME: "sensor-dashboard"
+  RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+  CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+  IMAGE_PULL_SECRET_NAME: ${{ secrets.IMAGE_PULL_SECRET_NAME }}
+  DEPLOYMENT_MANIFEST_PATH: "deployment.yml"
+
 jobs:
   run-linters:
     name: Run linters
