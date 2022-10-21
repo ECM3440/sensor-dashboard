@@ -82,7 +82,7 @@ jobs:
         # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr build --image ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.new_tag }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }}  .
+          az acr build --image ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }}  .
 
       - name: Comment on PR
         uses: mshick/add-pr-comment@v1
