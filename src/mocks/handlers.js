@@ -1,7 +1,7 @@
 import { rest } from "msw"
 
 export const handlers = [
-    rest.get(`${process.env.REACT_APP_EVENTPROCESSOR_URL}`, (req, res, ctx) => {
+    rest.get(`${process.env.REACT_APP_EVENTPROCESSOR_URL}/sensors`, (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(
@@ -25,5 +25,17 @@ export const handlers = [
                 ]
             )
         )
-    })
+    }),
+    rest.get(`${process.env.REACT_APP_EVENTPROCESSOR_URL}/actuators`, (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(
+                [
+                    { "sensor_type": "Soil Moisture" },
+                    { "sensor_type": "Temperature" },
+                    { "sensor_type": "Humidity" },
+                ]
+            )
+        )
+    }),
 ]
