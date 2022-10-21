@@ -22,12 +22,9 @@ describe("sensor chart", () => {
     test('renders chart', async () => {
         const { findByTestId } = render(<App />)
 
-        setTimeout(async () => {
-            await waitForElementToBeRemoved(await findByTestId("no-data-msg"))
-            await waitFor(await findByTestId("sensor-chart"))
+        await waitForElementToBeRemoved(await findByTestId("no-data-msg"))
 
-            expect(await findByTestId("sensor-chart")).toBeInTheDocument();
-        }, 500)
+        expect(await findByTestId("humidCard")).toBeInTheDocument();
     });
 
     test('renders no data message', async () => {
@@ -67,20 +64,6 @@ describe("actuator readings", () => {
         expect(soilCardValue).toHaveTextContent(0);
     })
 
-
-    test("renders soil moisture actuator card", async () => {
-        const { getByTestId } = render(<App />)
-
-        await waitFor(() => { getByTestId("soilCard") })
-        await waitFor(() => { getByTestId("soilCardValue") })
-
-        const soilCard = getByTestId("soilCard");
-        const soilCardValue = getByTestId("soilCardValue");
-        expect(soilCard).toBeInTheDocument();
-        // expect(soilCardValue).toHaveTextContent(0);
-    })
-
-
     test("renders temperature actuator card", async () => {
         const { getByTestId } = render(<App />)
 
@@ -90,7 +73,7 @@ describe("actuator readings", () => {
         const tempCard = getByTestId("tempCard");
         const tempCardValue = getByTestId("tempCardValue");
         expect(tempCard).toBeInTheDocument();
-        // expect(tempCardValue).toHaveTextContent(0);
+        expect(tempCardValue).toHaveTextContent(0);
     })
 
     test("renders humidity actuator card", async () => {
@@ -102,6 +85,6 @@ describe("actuator readings", () => {
         const humidCard = getByTestId("humidCard");
         const humidCardValue = getByTestId("humidCardValue");
         expect(humidCard).toBeInTheDocument();
-        // expect(tempCardValue).toHaveTextContent(0);
+        expect(humidCardValue).toHaveTextContent(0);
     })
 })

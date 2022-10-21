@@ -123,6 +123,7 @@ function App() {
           break;
         case "Humidity":
           setHumidActuatorData(humidActuatorData + 1)
+          break;
         default:
           console.log("sensor type not recognised")
           break;
