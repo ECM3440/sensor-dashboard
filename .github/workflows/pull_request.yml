@@ -75,6 +75,10 @@ jobs:
         run: |
           echo IMAGE_REPOSITORY=$(echo ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
 
+      - name: Set environment variables
+        run: |
+          touch .env && echo "REACT_APP_EVENTPROCESSOR_URL=${{ secrets.EVENTPROCESSOR_URL }}" >> .env
+
       - name: Build and push image
         run: |
           docker build . -t ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }} \
