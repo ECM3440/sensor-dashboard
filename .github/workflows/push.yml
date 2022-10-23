@@ -203,7 +203,6 @@ jobs:
           SERVICE_NAME: ${{ github.event.repository.name }}
           IMAGE_REPOSITORY: ${{ needs.build.outputs.imageRepository }}
           IMAGE_TAG: ${{ needs.build.outputs.imageTag }}
-          INGRESS_HOST: "-staging"
 
       # Deploys application based on given manifest file
       - name: Deploys application
@@ -260,8 +259,6 @@ jobs:
           SERVICE_NAME: ${{ github.event.repository.name }}
           IMAGE_REPOSITORY: ${{ needs.build.outputs.imageRepository }}
           IMAGE_TAG: ${{ needs.build.outputs.imageTag }}
-          # Setting ingress host to an empty string so that the url will be sensor-dashboard...
-          INGRESS_HOST: ""
 
       # Deploys application based on given manifest file
       - name: Deploys application

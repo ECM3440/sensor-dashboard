@@ -47,7 +47,7 @@ metadata:
     appgw.ingress.kubernetes.io/use-private-ip: "false"
 spec:
   rules:
-    - host: sensor-dashboard${INGRESS_HOST}.1ebc354abe5745168776.ukwest.aksapp.io
+    - host: sensor-dashboard.1ebc354abe5745168776.ukwest.aksapp.io
       http:
         paths:
           - path: /
