@@ -13,16 +13,16 @@ spec:
         app: sensor-dashboard
     spec:
       containers:
-      - name: sensor-dashboard
-        image: groupassignmentregistry.azurecr.io/sensor-dashboard:${IMAGE_TAG}
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 3000
-        resources:
-         #cpu and memory limit
-          limits:
-            memory: "550Mi"
-            cpu: "500m"
+        - name: sensor-dashboard
+          image: groupassignmentregistry.azurecr.io/sensor-dashboard:${IMAGE_TAG}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            #cpu and memory limit
+            limits:
+              memory: "550Mi"
+              cpu: "500m"
       restartPolicy: Always
 
 ---
@@ -47,7 +47,7 @@ metadata:
     appgw.ingress.kubernetes.io/use-private-ip: "false"
 spec:
   rules:
-    - host: sensor-dashboard.1ebc354abe5745168776.ukwest.aksapp.io
+    - host: sensor-dashboard${INGRESS_HOST}.1ebc354abe5745168776.ukwest.aksapp.io
       http:
         paths:
           - path: /
