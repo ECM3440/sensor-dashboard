@@ -11,8 +11,8 @@ env:
   STAGING_CLUSTER_NAME: ${{ secrets.STAGING_CLUSTER_NAME }}
   PRODUCTION_CLUSTER_NAME: ${{ secrets.PRODUCTION_CLUSTER_NAME }}
   IMAGE_PULL_SECRET_NAME: ${{ secrets.IMAGE_PULL_SECRET_NAME }}
-  STAGING_DEPLOYMENT_MANIFEST_PATH: "deployment-staging.yml"
-  PRODUCTION_DEPLOYMENT_MANIFEST_PATH: "deployment-production.yml"
+  STAGING_DEPLOYMENT_MANIFEST_PATH: "deployment/deployment-staging.yml"
+  PRODUCTION_DEPLOYMENT_MANIFEST_PATH: "deployment/deployment-production.yml"
 
 jobs:
   run-linters:
