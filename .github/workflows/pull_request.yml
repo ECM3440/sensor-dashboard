@@ -86,14 +86,14 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-
-      - name: Build and push image
-        run: |
-          dockerx buildx build -t ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }} \
-            --label org.opencontainers.image.source=${{ github.event.repository.clone_url }} \
-            --label org.opencontainers.image.revision=${{ github.sha }} \
-            --cache-to type=gha \
-            --cache-from type=gha .
+          
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          tags: ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Comment on PR
         uses: mshick/add-pr-comment@v1
