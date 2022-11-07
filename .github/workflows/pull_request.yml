@@ -89,11 +89,11 @@ jobs:
 
       - name: Build and push image
         run: |
-          docker build . -t ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }} \
+          dockerx buildx build -t ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }} \
             --label org.opencontainers.image.source=${{ github.event.repository.clone_url }} \
-            --label org.opencontainers.image.revision=${{ github.sha }}
-            
-          docker push ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }}
+            --label org.opencontainers.image.revision=${{ github.sha }} \
+            --cache-to type=gha \
+            --cache-from type=gha .
 
       - name: Comment on PR
         uses: mshick/add-pr-comment@v1
