@@ -71,25 +71,29 @@ jobs:
           tag="SNAPSHOT-PR-${{ github.event.pull_request.number }}-${sha:0:8}"
           echo "##[set-output name=GIT_TAG;]$(echo ${tag})"
 
-      # Logs in with your Azure credentials
-      - name: Azure login
-        uses: azure/login@v1.4.3
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - name: Generate image repository path
         id: image_repository_op
         run: |
           echo IMAGE_REPOSITORY=$(echo ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
-
+          
       - name: Set environment variables
         run: |
           touch .env && echo "REACT_APP_EVENTPROCESSOR_URL=${{ secrets.EVENTPROCESSOR_URL }}" >> .env
+          
+      - name: Login to Docker Hub
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
-        # Builds and pushes an image up to your Azure Container Registry
-      - name: Build and push image to ACR
+      - name: Build and push image
         run: |
-          az acr build --image ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }}  .
+          docker build . -t ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }} \
+            --label org.opencontainers.image.source=${{ github.event.repository.clone_url }} \
+            --label org.opencontainers.image.revision=${{ github.sha }}
+            
+          docker push ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }}
 
       - name: Comment on PR
         uses: mshick/add-pr-comment@v1
